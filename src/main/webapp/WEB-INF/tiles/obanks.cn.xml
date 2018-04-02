@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<definition name="baseLayout" template="/WEB-INF/views/layouts/baselayout.jsp">
+		<put-attribute name="title" value="欧巴金融同业版" />
+		<put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp" />
+		<put-attribute name="menu" value="/WEB-INF/views/layouts/menu.jsp" />
+		<!-- 
+		<put-attribute name="body" value="/WEB-INF/views/layouts/body.jsp" />
+		 -->
+		<put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp" />
+	</definition>
+
+	<definition name="*/index" template="/WEB-INF/views/layouts/indexlayout.jsp">
+		<put-attribute name="title" value="欧巴金融同业版" />
+		<put-attribute name="header" value="/WEB-INF/views/layouts/indexheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/index/index.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp" />
+	</definition>
+
+	<definition name="businessuser/add" template="/WEB-INF/views/layouts/businessuserlayout.jsp">
+		<put-attribute name="title" value="欧巴金融同业版--注册" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/businessuser/add.jsp" />
+	</definition>
+		<definition name="businessuser/success" template="/WEB-INF/views/layouts/businessuserlayout.jsp">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/businessuser/success.jsp" />
+	</definition>
+	
+ 	<definition name="businessuser/resetpwd" template="/WEB-INF/views/layouts/businessuserlayout.jsp">
+ 		<put-attribute name="title" value="找回密码" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/businessuser/resetpwd.jsp" />
+	</definition>
+
+ 	<definition name="index/projectdetails" template="/WEB-INF/views/layouts/detailslayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/jsp/index/projectdetails.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp" />
+	</definition>
+ 
+	<definition name="*/list" template="/WEB-INF/views/layouts/paginatelayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/jsp/{1}/list.jsp" />
+		<put-attribute name="paginate" value="/WEB-INF/views/jsp/common/paginate4ajax.jsp" />
+	</definition>
+
+  	<definition name="*/query" extends="baseLayout" template="/WEB-INF/views/layouts/querylayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/jsp/{1}/query.jsp" />
+		<put-attribute name="paginate" value="/WEB-INF/views/jsp/common/paginate4ajax.jsp" />
+	</definition>
+  
+	<definition name="login/*" template="/WEB-INF/views/layouts/loginlayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/jsp/login/{1}.jsp" />
+	</definition>
+		
+	<!-- 用于移动端 -->
+	<definition name="m/*" template="/WEB-INF/views/layouts/mLayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/jsp/m/{1}.jsp" />
+	</definition>
+	<!-- end -->
+
+	<definition name="*/*" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/jsp/{1}/{2}.jsp" />
+	</definition>
+
+	<definition name="*/window/*" template="/WEB-INF/views/layouts/windowlayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/jsp/{1}/window/{2}.jsp" />
+	</definition>
+
+
+</tiles-definitions>

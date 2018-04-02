@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.obanks.ar.mapper.AssetsAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="cn.obanks.ar.model.AssetsAttachment" >
+    <id column="ID" property="id" />
+    <result column="ASSETS_ID" property="assetsId" />
+    <result column="CATEGORY" property="category" />
+    <result column="FILENAME" property="filename" />
+    <result column="CREATED_BY" property="createdBy" />
+    <result column="CREATED_DATE" property="createdDate" />
+    <result column="UPDATED_BY" property="updatedBy" />
+    <result column="UPDATED_DATE" property="updatedDate" />
+    <result column="DELETED_FLAG" property="deletedFlag" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, ASSETS_ID, CATEGORY, FILENAME, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, 
+    DELETED_FLAG
+  </sql>
+  
+   <select id="load" parameterType="long" resultMap="BaseResultMap">
+		SELECT * FROM ASSETS_ATTACHMENT WHERE ID = #{id} AND ASSETS_ID= #{assetsId}
+	</select>
+	
+	<select id="detail" resultMap="BaseResultMap" parameterType="cn.obanks.ar.model.AssetsAttachment">
+		select * from ASSETS_ATTACHMENT WHERE DELETED_FLAG= 'N'
+		<if test="assetsId != null and assetsId != ''">
+			AND ASSETS_ID = #{assetsId}
+		</if>
+	</select>
+  
+  <insert id="add"  parameterType="cn.obanks.ar.model.AssetsAttachment">
+		<selectKey resultType="long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO ASSETS_ATTACHMENT (
+		ID, 
+		ASSETS_ID, 
+		CATEGORY, 
+		FILENAME, 
+		CREATED_BY,
+ 		CREATED_DATE, 
+		UPDATED_BY, 
+		UPDATED_DATE,
+		DELETED_FLAG
+		)
+		VALUES
+		(
+		#{id},
+		#{assetsId},
+		#{category},
+		#{filename},
+		#{createdBy},
+		#{createdDate},
+		#{updatedBy},
+		#{updatedDate},
+		#{deletedFlag}
+		)
+	</insert>
+</mapper>

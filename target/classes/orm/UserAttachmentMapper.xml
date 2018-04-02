@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.obanks.ar.mapper.UserAttachmentMapper">
+	<resultMap id="BaseResultMap" type="cn.obanks.ar.model.UserAttachment">
+		<id column="ID" property="id" />
+		<result column="USER_ID" property="userId" />
+		<result column="CATEGORY" property="category" />
+		<result column="FILENAME" property="filename" />
+		<result column="CREATED_BY" property="createdBy" />
+		<result column="CREATED_DATE" property="createdDate" />
+		<result column="UPDATED_BY" property="updatedBy" />
+		<result column="UPDATED_DATE" property="updatedDate" />
+		<result column="DELETED_FLAG" property="deletedFlag" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		ID, USER_ID, CATEGORY, FILENAME, CREATED_BY, CREATED_DATE,
+		UPDATED_BY,
+		UPDATED_DATE,
+		DELETED_FLAG
+	</sql>
+
+
+	<insert id="add" parameterType="cn.obanks.ar.model.UserAttachment">
+		INSERT INTO
+		USER_ATTACHMENT(ID,USER_ID,CATEGORY,FILENAME,CREATED_BY,CREATED_DATE,UPDATED_BY,
+		UPDATED_DATE,DELETED_FLAG)VALUES(#{id},#{userId},#{category},#{filename},#{createdBy},#{createdDate},#{updatedBy},#{updatedDate},#{deletedFlag})
+	</insert>
+</mapper>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.obanks.ar.mapper.AssetsConcernMapper">
+	<resultMap id="BaseResultMap" type="cn.obanks.ar.model.AssetsConcern">
+		<id column="ID" property="id" />
+		<result column="ASSETS_ID" property="assetsId" />
+		<result column="CONCERN_OWNER_ID" property="concernOwnerId" />
+		<result column="CREATED_BY" property="createdBy" />
+		<result column="CREATED_DATE" property="createdDate" />
+		<result column="UPDATED_BY" property="updatedBy" />
+		<result column="UPDATED_DATE" property="updatedDate" />
+		<result column="DELETED_FLAG" property="deletedFlag" />
+	    <result column="OFFER_COUNT" property="offerCount" />
+        <result column="OFFER_AMOUNT" property="offerAmount" />
+        
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		a.ID, a.ASSETS_ID, a.CONCERN_OWNER_ID, a.CREATED_BY, a.CREATED_DATE,
+		a.UPDATED_BY, a.UPDATED_DATE,
+		a.DELETED_FLAG,
+	</sql>
+
+	<resultMap id="AssetsResultMap" type="cn.obanks.ar.model.Assets">
+		<result column="USER_ID" property="userId" />
+		<result column="ASSETS_NAME" property="assetsName" />
+		<result column="SHORT_NAME" property="shortName" />
+		<result column="ASSET_TYPE" property="assetType" />
+		<result column="ASSET_TYPE_OTHER" property="assetTypeOther" />
+		<result column="ASSET_AREA" property="assetArea" />
+		<result column="ASSET_SCALES" property="assetScales" />
+		<result column="ASSET_UNIT" property="assetUnit" />
+		<result column="TERM_MIN" property="termMin" />
+		<result column="TERM_MAX" property="termMax" />
+		<result column="YIELD_MIN" property="yieldMin" />
+		<result column="YIELD_MAX" property="yieldMax" />
+		<result column="VALIDITY" property="validity" />
+		<result column="FINANCING_CATEGORY" property="financingCategory" />
+		<result column="FINANCING_CATEGORY_OTHER" property="financingCategoryOther" />
+		<result column="USE_OF_FUNDS" property="useOfFunds" />
+		<result column="FINANCING_CREDIT" property="financingCredit" />
+		<result column="FINANCING_ASSURE" property="financingAssure" />
+		<result column="OTHER" property="other" />
+		<result column="INTRODUCTION" property="introduction" />
+		<result column="STATUS" property="status" />
+		<result column="VALID_STATUS" property="validStatus" />
+		<result column="COMMIT_DATE" property="commitDate" />
+		<result column="END_DATE" property="endDate" />
+		<result column="CHECKED_REMARK" property="checkedRemark" />
+		<result column="CHECKED_BY" property="checkedBy" />
+		<result column="CHECKED_DATE" property="checkedDate" />
+		<result column="RELEASED_BY" property="releasedBy" />
+		<result column="RELEASED_DATE" property="releasedDate" />
+		<result column="UNRELEASED_BY" property="unreleasedBy" />
+		<result column="UNRELEASED_DATE" property="unreleasedDate" />
+		<result column="OFFER_FLAG" property="offerFlag" />
+		<result column="OFFER_TIME" property="offerTime" />
+		<result column="DATE_OF_INTEREST" property="dateOfInterest" />
+		<result column="DUE_DATE" property="dueDate" />
+		<result column="FUND_STATUS" property="fundStatus" />
+		<result column="ASSET_STATUS" property="assetStatus" />
+		<result column="INSTITUTION_NAME" property="institutionName" />
+		<result column="AMOUNT_UNIT" property="amountUnit" />
+		<result column="PHONE" property="phone" />
+		<result column="ASSET_STATUS" property="assetStatus" />
+		<result column="DATE_OF_INTEREST" property="dateOfInterest" />
+		<result column="DUE_DATE" property="dueDate" />
+
+	</resultMap>
+
+	<sql id="Assets_Column_List">
+		b.USER_ID, b.ASSETS_NAME, b.SHORT_NAME, b.ASSET_TYPE, b.ASSET_TYPE_OTHER,
+		b.ASSET_AREA, b.ASSET_SCALES,
+		b.ASSET_UNIT, b.TERM_MIN, b.TERM_MAX, b.YIELD_MIN, b.YIELD_MAX, b.VALIDITY,
+		b.FINANCING_CATEGORY, b.FINANCING_CATEGORY_OTHER,
+		b.USE_OF_FUNDS, b.FINANCING_CREDIT, b.FINANCING_ASSURE, b.OTHER, b.INTRODUCTION,
+		b.STATUS, b.VALID_STATUS,
+		b.COMMIT_DATE, b.END_DATE, b.CHECKED_REMARK, b.CHECKED_BY, b.CHECKED_DATE,
+		b.RELEASED_BY, b.RELEASED_DATE,
+		b.UNRELEASED_BY, b.UNRELEASED_DATE, b.OFFER_FLAG, b.OFFER_TIME,
+		b.ASSET_STATUS,b.DATE_OF_INTEREST, b.DUE_DATE,
+	</sql>
+
+
+	<resultMap id="MyConcernMap" type="cn.obanks.ar.model.AssetsConcern">
+		<id column="ID" property="id" />
+		<result column="ASSETS_ID" property="assetsId" />
+		<result column="CONCERN_OWNER_ID" property="concernOwnerId" />
+		<result column="CREATED_BY" property="createdBy" />
+		<result column="CREATED_DATE" property="createdDate" />
+		<result column="UPDATED_BY" property="updatedBy" />
+		<result column="UPDATED_DATE" property="updatedDate" />
+		<result column="DELETED_FLAG" property="deletedFlag" />
+	    <result column="OFFER_COUNT" property="offerCount" />
+		<result column="OFFER_AMOUNT" property="offerAmount" />
+		<association property="assets" javaType="cn.obanks.ar.model.Assets"
+			resultMap="AssetsResultMap" />
+	</resultMap>
+
+	<select id="query" resultMap="MyConcernMap" parameterType="cn.obanks.common.Paginate">
+		select
+		<include refid="Base_Column_List" />
+		<include refid="Assets_Column_List" />
+		(SELECT COUNT(ID) FROM ASSETS_DEAL WHERE ASSETS_ID=B.ID AND INVESTER_ID=#{condition.concernOwnerId}) OFFER_COUNT,
+		(SELECT SUM(OFFER_AMOUNT) FROM ASSETS_DEAL WHERE ASSETS_ID=B.ID) OFFER_AMOUNT 
+		FROM ASSETS_CONCERN A,ASSETS B 
+		<include refid="paginateConditionQuery" />
+		AND A.DELETED_FLAG='N' AND A.ASSETS_ID=B.ID
+		ORDER BY A.ID DESC LIMIT #{startNum}, #{recordsPerPage}
+	</select>
+
+
+	<select id="load" parameterType="long" resultMap="BaseResultMap">
+		SELECT * FROM
+		ASSETS_CONCERN WHERE ID = #{id}
+	</select>
+
+	<select id="detail" resultMap="BaseResultMap" parameterType="cn.obanks.ar.model.AssetsConcern">
+		SELECT * FROM ASSETS_CONCERN where ASSETS_ID=#{assetsId}
+	</select>
+
+	<insert id="add" parameterType="cn.obanks.ar.model.AssetsConcern">
+		<selectKey resultType="long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO ASSETS_CONCERN(
+		ID,
+		ASSETS_ID,
+		CONCERN_OWNER_ID,
+		CREATED_BY,
+		CREATED_DATE,
+		UPDATED_BY,
+		UPDATED_DATE,
+		DELETED_FLAG
+		)
+		VALUES(
+		#{id},
+		#{assetsId},
+		#{concernOwnerId},
+		#{createdBy},
+		#{createdDate},
+		#{updatedBy},
+		#{updatedDate},
+		#{deletedFlag}
+		)
+	</insert>
+
+	<update id="changeConcernFlag" parameterType="cn.obanks.ar.model.AssetsConcern">
+		UPDATE ASSETS_CONCERN SET DELETED_FLAG=#{deletedFlag} WHERE ID=#{id}
+	</update>
+
+	<update id="mergeDeletedFlag" parameterType="cn.obanks.ar.model.AssetsConcern">
+		UPDATE ASSETS_CONCERN SET
+		DELETED_FLAG=#{deletedFlag}
+		WHERE ID=#{id}
+	</update>
+
+	<!-- 分页查询 -->
+	<sql id="paginateCondition">
+		<where>
+			<if test="condition!=null">
+				<if test="condition.startTime != null and condition.startTime != ''">
+					CREATED_DATE <![CDATA[>=]]>
+					#{condition.startTime}
+				</if>
+			</if>
+			<if test="condition!=null">
+				<if test="condition.endTime != null and condition.endTime != ''">
+					AND CREATED_DATE <![CDATA[<=]]>
+					#{condition.endTime}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="search" parameterType="cn.obanks.common.Paginate"
+		resultMap="BaseResultMap">
+		SELECT * FROM ASSETS_CONCERN
+		<include refid="paginateCondition" />
+		ORDER BY
+		ID DESC LIMIT #{startNum}, #{recordsPerPage}
+	</select>
+
+	<select id="count" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT
+		COUNT(1)
+		FROM
+		ASSETS_CONCERN
+		<include refid="paginateCondition" />
+	</select>
+
+	<sql id="paginateConditionQuery">
+		<where>
+			<if test="condition!=null">
+				<if
+					test="condition.concernOwnerId != null and condition.concernOwnerId != ''">
+					a.CONCERN_OWNER_ID <![CDATA[=]]>
+					#{condition.concernOwnerId}
+				</if>
+			</if>
+		</where>
+	</sql>
+
+	<select id="queryCount" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT
+		COUNT(1)
+		FROM
+		ASSETS_CONCERN A
+		<include refid="paginateConditionQuery" />
+	</select>
+
+	<select id="loadConcern" resultMap="BaseResultMap" parameterType="cn.obanks.ar.model.AssetsConcern">
+		SELECT * FROM ASSETS_CONCERN where ASSETS_ID=#{assetsId} and CONCERN_OWNER_ID=#{concernOwnerId}
+	</select>
+
+
+
+</mapper>

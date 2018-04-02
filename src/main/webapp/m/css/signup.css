@@ -1,0 +1,380 @@
+body {
+	margin: 0px; padding: 0px;
+}
+button {
+	margin: 0px; padding: 0px;
+}
+dd {
+	margin: 0px; padding: 0px;
+}
+dl {
+	margin: 0px; padding: 0px;
+}
+dt {
+	margin: 0px; padding: 0px;
+}
+form {
+	margin: 0px; padding: 0px;
+}
+h1 {
+	margin: 0px; padding: 0px;
+}
+h2 {
+	margin: 0px; padding: 0px;
+}
+h3 {
+	margin: 0px; padding: 0px;
+}
+h4 {
+	margin: 0px; padding: 0px;
+}
+h5 {
+	margin: 0px; padding: 0px;
+}
+h6 {
+	margin: 0px; padding: 0px;
+}
+hr {
+	margin: 0px; padding: 0px;
+}
+li {
+	margin: 0px; padding: 0px;
+}
+ol {
+	margin: 0px; padding: 0px;
+}
+p {
+	margin: 0px; padding: 0px;
+}
+pre {
+	margin: 0px; padding: 0px;
+}
+td {
+	margin: 0px; padding: 0px;
+}
+textarea {
+	margin: 0px; padding: 0px;
+}
+th {
+	margin: 0px; padding: 0px;
+}
+ul {
+	margin: 0px; padding: 0px;
+}
+* {
+	box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;
+}
+body {
+	color: rgb(30, 30, 30); 
+	font-family: "Microsoft YaHei","Helvetica Neue",Helvetica,STHeiTi,sans-serif; 
+	font-size: 100%; 
+	-ms-text-size-adjust: 100%; 
+	-webkit-text-size-adjust: 100%; 
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* html {
+	margin: 0px auto; max-width: 640px;
+} */
+select {
+	outline: 0px; font-size: 100%; -webkit-user-modify: read-write-plaintext-only;
+}
+textarea {
+	outline: 0px; font-size: 100%; -webkit-user-modify: read-write-plaintext-only;
+}
+textarea {
+	border: 0px currentColor; border-image: none; -webkit-appearance: none;
+}
+textarea {
+	resize: none;
+}
+button {
+	border: 0px currentColor; border-image: none; font-size: 15px;
+}
+a {
+	color: rgb(30, 30, 30); text-decoration: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+img {
+	border: 0px currentColor; border-image: none; vertical-align: top;
+}
+ol {
+	list-style: none;
+}
+ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse; border-spacing: 0;
+}
+.g-cf::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: "";
+}
+.g-cf {
+	
+}
+.g-f-l {
+	float: left;
+}
+.g-f-r {
+	float: right;
+}
+.g-d-n {
+	display: none;
+}
+.g-d-b {
+	display: block;
+}
+.g-v-h {
+	visibility: hidden;
+}
+.g-d-ib {
+	display: inline-block;
+}
+.g-p-r {
+	position: relative;
+}
+.g-ta-c {
+	text-align: center;
+}
+.g-ta-l {
+	text-align: left;
+}
+.g-ta-r {
+	text-align: right;
+}
+.g-v-m {
+	vertical-align: middle;
+}
+.g-fw-b {
+	font-weight: 700;
+}
+.g-ww-bw {
+	white-space: normal; -ms-word-break: break-all; -ms-word-wrap: break-word;
+}
+.g-to-e {
+	overflow: hidden; white-space: nowrap; -ms-word-wrap: normal; -ms-text-overflow: ellipsis;
+}
+.g-mtb-10 {
+	margin-top: 10px; margin-bottom: 10px;
+}
+.g-mlr-10 {
+	margin-right: 10px; margin-left: 10px;
+}
+.g-mr-25 {
+	margin-right: 25px;
+}
+.g-mr-10 {
+	margin-right: 10px;
+}
+.g-mr-5 {
+	margin-right: 5px;
+}
+.g-mb-5 {
+	margin-bottom: 5px;
+}
+.g-mt-10 {
+	margin-top: 10px;
+}
+.g-mt-15 {
+	margin-top: 15px;
+}
+.g-mt-20 {
+	margin-top: 20px;
+}
+.g-p-10 {
+	padding: 10px;
+}
+.g-plr-10 {
+	padding-right: 10px; padding-left: 10px;
+}
+.g-ptb-5 {
+	padding-top: 5px; padding-bottom: 5px;
+}
+.g-ptb-10 {
+	padding-top: 10px; padding-bottom: 10px;
+}
+.g-ptb-20 {
+	padding-top: 20px; padding-bottom: 20px;
+}
+.g-pr-20 {
+	padding-right: 20px;
+}
+.g-pl-10 {
+	padding-left: 10px;
+}
+.g-pb-5 {
+	padding-bottom: 5px;
+}
+.g-pb-15 {
+	padding-bottom: 15px;
+}
+.g-fs-12 {
+	font-size: 12px;
+}
+.g-fs-13 {
+	font-size: 13px;
+}
+.g-fs-14 {
+	font-size: 14px;
+}
+.g-fs-20 {
+	font-size: 20px;
+}
+.g-m-a {
+	margin: 0px auto;
+}
+.g-img-responsive {
+	height: auto; display: block; max-width: 100%;
+}
+.g-tips {
+	transition:transform 0.3s; left: 10%; top: 50%; width: 80%; color: rgb(255, 255, 255); line-height: 22px; font-size: 14px; visibility: hidden; position: fixed; z-index: 999; transform: scale(0.5); -webkit-transform: scale(0.5); -webkit-transition: transform .3s;
+}
+.g-tips p {
+	background: rgba(0, 0, 0, 0.7); padding: 5px 10px; border-radius: 6px; text-align: center; -webkit-border-radius: 6px;
+}
+.g-tips a {
+	color: rgb(255, 130, 79);
+}
+.g-tips.show {
+	visibility: visible; transform: scale(1); -webkit-transform: scale(1);
+}
+.g-loading {
+	background: url("../../../image/loading.gif") no-repeat center / 30px 30px; left: 0px; top: 0px; width: 100%; height: 100%; visibility: hidden; position: fixed; z-index: 998;
+}
+#appDownload {
+	background: rgba(0, 0, 0, 0.8); left: 0px; top: 0px; width: 100%; height: 44px; color: rgb(255, 255, 255); line-height: 44px; overflow: hidden; position: fixed; z-index: 9999;
+}
+#appDownload .part-left {
+	width: 42%; color: rgb(243, 152, 0); padding-left: 12px; font-size: 12px; font-weight: 700; float: left;
+}
+#appDownload .part-right {
+	float: right;
+}
+#appDownload .part-right .btn-android {
+	background: url("../images/appdown-sprites.png") no-repeat 0% 0% / 155px 24px; overflow: hidden; vertical-align: middle; display: inline-block; -webkit-background-size: 155px 24px;
+}
+#appDownload .part-right .btn-close {
+	background: url("../images/appdown-sprites.png") no-repeat 0% 0% / 155px 24px; overflow: hidden; vertical-align: middle; display: inline-block; -webkit-background-size: 155px 24px;
+}
+#appDownload .part-right .btn-ios {
+	background: url("../images/appdown-sprites.png") no-repeat 0% 0% / 155px 24px; overflow: hidden; vertical-align: middle; display: inline-block; -webkit-background-size: 155px 24px;
+}
+#appDownload .part-right .btn-android {
+	width: 67px; height: 25px; margin-right: 5px;
+}
+#appDownload .part-right .btn-ios {
+	width: 67px; height: 25px; margin-right: 5px;
+}
+#appDownload .part-right .btn-ios {
+	background-position: -72px 0px;
+}
+#appDownload .part-right .btn-close {
+	background-position: -142px 16px; width: 25px; height: 44px; cursor: pointer;
+}
+.main-content {
+	margin-top: 44px;
+}
+.register-form {
+	background: rgb(255, 255, 255); padding: 10px 0px 20px; color: rgb(48, 48, 48);
+}
+.register-form .item {
+	background: rgb(255, 255, 255); margin: 0px auto; border: 1px solid rgb(155, 155, 155); border-image: none; width: 76.09%; height: 43px; line-height: 43px; padding-left: 5px;
+}
+.register-form .item span {
+	color: rgb(179, 179, 179);
+}
+.register-form .item span.red {
+	color: red;
+}
+.register-form .item input {
+	border: currentColor; border-image: none; width: 60%; color: rgb(48, 48, 48); text-indent: 5px; font-size: 16px;
+	margin: 0px; padding: 0px;
+	outline: 0px; font-size: 100%; -webkit-user-modify: read-write-plaintext-only;
+	border: 0px currentColor; border-image: none; -webkit-appearance: none;
+}
+.register-form .tip {
+	margin: 2px auto; width: 76.09%; height: 20px; color: rgb(222, 43, 48); line-height: 20px; font-size: 12px; visibility: hidden;
+}
+.register-form .verify {
+	margin: 0px auto; width: 76.09%;
+}
+.register-form .verify .item {
+	width: 57%;
+}
+.register-form .verify .item input {
+	width: 45%;
+}
+.register-form .verify button {
+	background: url("bg-verifyCode.jpg") no-repeat 0% 0% / 100% 43px; width: 40%; text-align: center; color: rgb(255, 255, 255); line-height: 43px; font-size: 1em;
+}
+.sendRegister{
+	background: url("bg-verifyCode.jpg") no-repeat 0% 0% / 100% 43px; width: 40%; text-align: center; color: rgb(255, 255, 255); line-height: 43px; font-size: 1em;float: right;
+	outline: 0px; font-size: 100%; -webkit-user-modify: read-write-plaintext-only;
+	border: 0px currentColor; border-image: none; -webkit-appearance: none;
+}
+.register-form .verify button.disabled {
+	background: rgb(153, 153, 153);
+}
+.register-form .user-xy {
+	margin: -5px auto 3px; width: 76.09%; color: rgb(77, 77, 77); font-size: 12px;
+}
+.register-form .user-xy .checkbox {
+	background: rgb(255, 255, 255); border: 1px solid rgb(148, 148, 148); border-image: none; top: 5px; width: 18px; height: 18px; display: inline-block; position: relative;
+}
+.register-form .user-xy .gou { 
+	background: url("/images/gou.png") no-repeat 0% 0% / 120% 92.5% rgb(255, 255, 255);
+}
+.register-form .user-xy a {
+	color: rgb(222, 43, 48);
+}
+.register-form .but-next a {
+	background: url("bg-register.jpg") no-repeat 0% 0% / 100% 45px; margin: 5px auto 0px; width: 76.09%; text-align: center; color: rgb(255, 255, 255); line-height: 45px; font-size: 24px; text-decoration: none; display: block;
+}
+.footer {
+	background: rgb(255, 255, 255); text-align: center; margin-bottom: 40px;
+}
+.footer .more {
+	height: 48px; color: rgb(77, 77, 77); line-height: 48px; font-size: 15px; font-weight: 700;
+}
+.footer .more a {
+	color: rgb(222, 43, 48);
+}
+.footer .copyright {
+	height: 43px; color: rgb(77, 77, 77); font-size: 10px;
+}
+.p-fixed img {
+	right: 5px; bottom: 20%; position: fixed;
+}
+.p-fixed .login {
+	width: 50%; height: 40px; text-align: center; bottom: 0px; color: rgb(255, 255, 255); line-height: 40px; position: fixed;
+}
+.p-fixed .register {
+	width: 50%; height: 40px; text-align: center; bottom: 0px; color: rgb(255, 255, 255); line-height: 40px; position: fixed;
+}
+.p-fixed .register {
+	background: rgb(41, 155, 110); left: 0px;
+}
+.p-fixed .login {
+	background: rgb(233, 123, 0); right: 0px;
+}
+
+.pass-item-error{
+	background: url(../images/reg_icons.png) no-repeat -80px -24px;
+    color: red;
+    line-height: 14px;
+    padding-left: 10px;
+    left:169px;
+    top: 44px;
+    width: 280px
+}
+
+.pass-item-succ{
+    background: url(../images/reg_icons.png) no-repeat -80px 0;
+    display: block;
+    float: left;
+    height: 16px;
+    line-height: 14px;
+    padding-left: 20px;
+    position: relative;
+    top: 2px;
+    width: 250px
+}

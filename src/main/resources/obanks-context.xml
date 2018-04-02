@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<bean id="druid-stat-interceptor"
+		class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor" />
+	<bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut"
+		scope="prototype">
+		<property name="patterns">
+			<list>
+				<value>cn.obanks.usp.*</value>
+			</list>
+		</property>
+	</bean>
+	<aop:config>
+		<aop:advisor advice-ref="druid-stat-interceptor"
+			pointcut-ref="druid-stat-pointcut" />
+	</aop:config>
+	<import resource="obanks-common-data.xml" />
+	<import resource="obanks-jms.xml" />
+
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.noise.color">white</prop>
+						<prop key="kaptcha.textproducer.char.string">0123456789</prop>
+						<prop key="kaptcha.textproducer.font.color">blue</prop>
+						<prop key="kaptcha.image.width">250</prop>
+						<prop key="kaptcha.textproducer.font.size">90</prop>
+						<prop key="kaptcha.image.height">90</prop>
+						<prop key="kaptcha.session.key">code</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">正楷</prop>
+
+						
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+	<!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<!-- 指定所上传文件的总大小不能超过KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 <property 
+			name="maxUploadSize" value="4000000" /> -->
+		<!-- 最大内存大小 (10240) -->
+		<property name="maxInMemorySize" value="40960" />
+		<property name="resolveLazily" value="true" />
+	</bean>
+</beans>

@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+#header{
+	height:300px;
+	background-color:#35A3E9;
+}
+#assetsname{
+	padding-top:70px;
+	font-size:20px;
+	color:#fff;
+	text-align:center;
+}
+#browse{
+	padding-top:5px;
+	font-size:18px;
+	color:#d1e7f9;
+	text-align:center;
+}
+#details{
+	padding-top:50px;
+	height:70px;
+	width:100%;
+	text-align:center;
+}

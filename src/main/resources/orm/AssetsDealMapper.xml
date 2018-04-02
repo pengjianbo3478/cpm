@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.obanks.ar.mapper.AssetsDealMapper" >
+  <resultMap id="BaseResultMap" type="cn.obanks.ar.model.AssetsDeal" >
+    <id column="ID" property="id" />
+    <result column="ASSETS_ID" property="assetsId" />
+    <result column="OWNER_ID" property="ownerId" />
+    <result column="INVESTER_ID" property="investerId" />
+    <result column="OFFER_AMOUNT" property="offerAmount" />
+    <result column="AMOUNT_UNIT" property="amountUnit" />
+    <result column="FUND_STATUS" property="fundStatus" />
+    <result column="ASSET_STATUS" property="assetStatus" />
+    <result column="DATE_OF_INTEREST" property="dateOfInterest" />
+    <result column="DUE_DATE" property="dueDate" />
+    <result column="CREATED_BY" property="createdBy" />
+    <result column="CREATED_DATE" property="createdDate" />
+    <result column="UPDATED_BY" property="updatedBy" />
+    <result column="UPDATED_DATE" property="updatedDate" />
+    <result column="DELETED_FLAG" property="deletedFlag" />
+    <result column="STATUS" property="status" />
+    
+    
+    <result column="ASSETS_NAME" property="assetsName" />
+    <result column="SHORT_NAME" property="shortName" />
+    <result column="INSTITUTION_NAME" property="institutionName" />
+    <result column="ASSET_UNIT" property="assetUnit" />
+    <result column="NAME" property="name" />
+    <result column="PHONE" property="phone" />
+    
+    <result column="COUNT_BROWSE_ASSETS" property="countBrowseAssets" />
+    <result column="COUNT_INTENTION_ASSETS" property="countIntentionAssets" />
+    <result column="COUNT_JINTIAO_ASSETS" property="countJinTiaoAssets" />
+    <result column="COUNT_START_CHECK_ASSETS" property="countStartCheckAssets" />
+    <result column="COUNT_PASS_CHECK_ASSETS" property="countPassCheckAssets" />
+    <result column="COUNT_FINISH_ASSETS" property="countFinishAssets" /> 
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, ASSETS_ID, OWNER_ID, INVESTER_ID, OFFER_AMOUNT, AMOUNT_UNIT, FUND_STATUS, ASSET_STATUS, 
+    DATE_OF_INTEREST, DUE_DATE, CREATED_BY, CREATED_DATE, UPDATED_BY, UPDATED_DATE, DELETED_FLAG
+  </sql>
+  
+  <insert id="add" parameterType="cn.obanks.ar.model.AssetsDeal">
+		<selectKey resultType="long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO ASSETS_DEAL (
+		ID, 
+		ASSETS_ID, 
+		OWNER_ID, 
+		INVESTER_ID, 
+		OFFER_AMOUNT, 
+		AMOUNT_UNIT, 
+		FUND_STATUS, 
+		ASSET_STATUS, 
+	    DATE_OF_INTEREST, 
+	    DUE_DATE, 
+	    CREATED_BY, 
+	    CREATED_DATE, 
+	    UPDATED_BY, 
+	    UPDATED_DATE, 
+	    DELETED_FLAG
+		)
+		VALUES
+		(
+		#{id},
+		#{assetsId},
+		#{ownerId},
+		#{investerId},
+		#{offerAmount},
+		#{amountUnit},
+		#{fundStatus},
+		#{assetStatus},
+		#{dateOfInterest},
+		#{dueDate},
+		#{createdBy},
+		#{createdDate},
+		#{updatedBy},
+		#{updatedDate},
+		#{deletedFlag}
+		)
+	</insert>
+	
+	
+    <select id="load" parameterType="long" resultMap="BaseResultMap">
+		SELECT * FROM ASSETS_DEAL WHERE INVESTER_ID = #{id} LIMIT 1
+	</select>
+	
+	<select id="detail" resultMap="BaseResultMap" parameterType="cn.obanks.ar.model.AssetsDeal">
+		select * from ASSETS_DEAL WHERE DELETED_FLAG= 'N'
+		<if test="assetsId != null and assetsId != ''">
+			AND ASSETS_ID = #{assetsId} AND OWNER_ID = #{ownerId} AND INVESTER_ID = #{investerId}
+		</if>
+	</select>
+
+	
+	<update id="merge" parameterType="cn.obanks.ar.model.AssetsDeal">
+		UPDATE ASSETS_DEAL
+		<set>
+			<if test="ownerId!=null">
+				OWNER_ID=#{ownerId},
+			</if>
+			<if test="fundStatus!=null">
+				FUND_STATUS=#{fundStatus},
+			</if>
+			<if test="assetStatus!=null">
+				ASSET_STATUS=#{assetStatus},
+			</if>
+			<if test="updatedBy!=null">
+				UPDATED_BY=#{updatedBy},
+			</if>
+				<if test="updatedDate!=null">
+				UPDATED_DATE=#{updatedDate},
+			</if>
+		</set>
+		WHERE ID=#{id}
+	</update>
+	
+	<select id="assetStatusCount" parameterType="cn.obanks.common.Paginate" resultMap="BaseResultMap">
+ 	 SELECT A.ID,A.ASSETS_NAME,A.SHORT_NAME,A.USER_ID,A.STATUS,B.countIntentionAssets,C.countJinTiaoAssets,D.countStartCheckAssets,E.countPassCheckAssets,F.countFinishAssets ,G.countBrowseAssets FROM ASSETS A  
+	 JOIN (SELECT ASSETS_ID,FUND_STATUS, COUNT(1) AS countIntentionAssets  FROM ASSETS_DEAL WHERE FUND_STATUS='IS'  GROUP BY ASSETS_ID,FUND_STATUS) B ON A.ID=B.ASSETS_ID
+	 LEFT JOIN (SELECT ASSETS_ID,FUND_STATUS,  COUNT(1) AS countJinTiaoAssets  FROM ASSETS_DEAL WHERE  FUND_STATUS='BT'  GROUP BY ASSETS_ID,FUND_STATUS ) C ON A.ID=C.ASSETS_ID
+	 LEFT JOIN (SELECT ASSETS_ID,FUND_STATUS,  COUNT(1) AS countStartCheckAssets  FROM ASSETS_DEAL WHERE  FUND_STATUS='SR'  GROUP BY ASSETS_ID,FUND_STATUS )  D ON A.ID=D.ASSETS_ID  
+	 LEFT JOIN (SELECT ASSETS_ID,FUND_STATUS,  COUNT(1) AS countPassCheckAssets  FROM ASSETS_DEAL WHERE  FUND_STATUS='TR'  GROUP BY ASSETS_ID,FUND_STATUS )  E ON A.ID=E.ASSETS_ID 
+	 LEFT JOIN (SELECT ASSETS_ID,FUND_STATUS,  COUNT(1) AS countFinishAssets  FROM ASSETS_DEAL WHERE  FUND_STATUS='CS'  GROUP BY ASSETS_ID,FUND_STATUS )  F ON A.ID=F.ASSETS_ID
+	 LEFT JOIN (SELECT ASSET_ID, COUNT(1) AS countBrowseAssets  FROM ASSETS_VIEW_JOURNAL  GROUP BY ASSET_ID)  G ON A.ID=G.ASSET_ID
+	 WHERE STATUS="OL"
+ 	 <include refid="paginateCondition1" /> 
+ 	 ORDER BY ID DESC LIMIT #{startNum}, #{recordsPerPage}
+	</select>
+
+	<select id="count" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT COUNT(1) FROM ASSETS_DEAL where FUND_STATUS='IS'
+		<include refid="paginateCondition2" /> 
+	</select>
+	
+
+	<select id="search" parameterType="cn.obanks.common.Paginate" resultMap="BaseResultMap">
+		SELECT A.ID,A.ASSETS_ID,A.FUND_STATUS,B.ASSETS_NAME FROM ASSETS_DEAL A,ASSETS B WHERE A.ASSETS_ID=B.ID
+	</select>
+	
+	<select id="loadInvester" resultMap="BaseResultMap" parameterType="cn.obanks.ar.model.AssetsDeal">
+		select * from ASSETS_DEAL WHERE DELETED_FLAG= 'N'
+		<if test="assetsId != null and assetsId != ''">
+			AND ASSETS_ID = #{assetsId} AND INVESTER_ID = #{investerId}
+		</if>
+	</select>
+	
+	<select id="countCellAssets" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT COUNT(1) FROM ASSETS_DEAL 
+	</select>
+	
+	<select id="searchcellAssets" parameterType="cn.obanks.common.Paginate" resultMap="BaseResultMap">
+		SELECT P1.INVESTER_ID,
+		P1.OFFER_AMOUNT,P1.FUND_STATUS,P1.STATUS,
+		P2.INSTITUTION_NAME,P2.PHONE,P2.NAME,
+		P3.ASSET_UNIT
+		FROM ASSETS_DEAL P1,BUSINESS_USER P2,ASSETS P3
+		WHERE P1.INVESTER_ID=P2.ID  AND P1.ASSETS_ID=P3.ID AND
+		<include refid="paginateCondition" />
+		 ORDER BY P1.CREATED_DATE DESC LIMIT  #{startNum},  #{recordsPerPage} 
+	</select>
+	
+	<sql id="paginateCondition">
+			<if test="condition!=null">
+				<if test="condition.assetsId != null and condition.assetsId != ''">
+					P1.ASSETS_ID = #{condition.assetsId}
+				</if>
+			</if>
+	</sql>
+	
+ 	<sql id="paginateCondition1">
+			<if test="condition!=null">
+				<if test="condition.ownerId!= null and condition.ownerId != ''">
+				  AND	USER_ID=#{condition.ownerId}
+				</if>
+			</if>
+	</sql>
+	 <sql id="paginateCondition2">
+			<if test="condition!=null">
+				<if test="condition.ownerId!= null and condition.ownerId != ''">
+				  AND	OWNER_ID=#{condition.ownerId}
+				</if>
+			</if>
+	</sql>
+	
+   	<select id="loadAssetsDeal" parameterType="cn.obanks.ar.model.AssetsDeal" resultMap="BaseResultMap">
+			SELECT * FROM ASSETS_DEAL WHERE INVESTER_ID=#{investerId} AND ASSETS_ID=#{assetsId}
+	</select>
+	
+	<update id="updateStatus" parameterType="cn.obanks.ar.model.AssetsDeal">
+		UPDATE ASSETS_DEAL SET FUND_STATUS=#{fundStatus},STATUS=1 WHERE ID=#{id}
+	</update>
+	
+	<update id="updateAmount" parameterType="cn.obanks.ar.model.AssetsDeal">
+		UPDATE ASSETS_DEAL SET OFFER_AMOUNT=#{offerAmount},AMOUNT_UNIT=#{amountUnit} WHERE ID=#{id}
+	</update>
+	
+</mapper>

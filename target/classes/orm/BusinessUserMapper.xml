@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.obanks.ar.mapper.BusinessUserMapper">
+	<resultMap id="BaseResultMap" type="cn.obanks.ar.model.BusinessUser">
+		<id column="ID" property="id" jdbcType="BIGINT" />
+		<result column="INSTITUTION_NAME" property="institutionName"
+			jdbcType="VARCHAR" />
+		<result column="INSTITUTION_TYPE" property="institutionType"
+			jdbcType="INTEGER" />
+		<result column="DEPARTMENT" property="department" jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+		<result column="PHONE" property="phone" jdbcType="VARCHAR" />
+		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		<result column="JOB_TITLE" property="jobTitle" jdbcType="VARCHAR" />
+		<result column="ID_CARD" property="idCard" jdbcType="VARCHAR" />
+		<result column="WORK_CARD" property="workCard" jdbcType="VARCHAR" />
+		<result column="TEL_NUM" property="telNum" jdbcType="VARCHAR" />
+		<result column="REGISTER_TIME" property="registerTime"
+			jdbcType="TIMESTAMP" />
+		<result column="REGISTER_STATUS" property="registerStatus"
+			jdbcType="VARCHAR" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="CHECKED_BY" property="checkedBy" jdbcType="BIGINT" />
+		<result column="CHECKED_DATE" property="checkedDate" jdbcType="TIMESTAMP" />
+		<result column="REVIEWED_BY" property="reviewedBy" jdbcType="BIGINT" />
+		<result column="REVIEWED_DATE" property="reviewedDate"
+			jdbcType="TIMESTAMP" />
+		<result column="CREATED_BY" property="createdBy" jdbcType="BIGINT" />
+		<result column="CREATED_DATE" property="createdDate" jdbcType="TIMESTAMP" />
+		<result column="UPDATED_BY" property="updatedBy" jdbcType="BIGINT" />
+		<result column="UPDATED_DATE" property="updatedDate" jdbcType="TIMESTAMP" />
+		<result column="DELETED_FLAG" property="deletedFlag" jdbcType="CHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, INSTITUTION_NAME, INSTITUTION_TYPE, DEPARTMENT, NAME,
+		PHONE, EMAIL,
+		JOB_TITLE,
+		ID_CARD, WORK_CARD, TEL_NUM, REGISTER_TIME,
+		REGISTER_STATUS, STATUS,
+		CHECKED_BY,
+		CHECKED_DATE, REVIEWED_BY,
+		REVIEWED_DATE, CREATED_BY, CREATED_DATE, UPDATED_BY,
+		UPDATED_DATE,
+		DELETED_FLAG
+	</sql>
+	<insert id="add" parameterType="cn.obanks.ar.model.BusinessUser">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID
+		</selectKey>
+		INSERT INTO
+		BUSINESS_USER(ID,INSTITUTION_NAME,NAME,PHONE,EMAIL,REGISTER_STATUS,STATUS,REGISTER_TIME,CREATED_BY,CREATED_DATE,UPDATED_BY,UPDATED_DATE,DELETED_FLAG)
+		values(#{id},#{institutionName},#{name},#{phone},#{email},#{registerStatus},#{status},#{registerTime}, ${createdBy},#{createdDate},#{updatedBy},#{updatedDate},#{deletedFlag})
+	</insert>
+	<update id="updateCreatedBy"  parameterType="cn.obanks.ar.model.BusinessUser">
+		UPDATE BUSINESS_USER SET CREATED_BY=#{createdBy} WHERE ID=#{id}
+	</update>	
+		
+
+	<select id="searchPhone" parameterType="String" resultMap="BaseResultMap">
+		SELECT * FROM BUSINESS_USER WHERE PHONE = #{phone} LIMIT 0,1
+	</select>
+
+	<select id="searchEmail" parameterType="String" resultMap="BaseResultMap">
+		SELECT * FROM BUSINESS_USER WHERE EMAIL = #{email} LIMIT 0,1
+	</select>
+	
+	<select id="detail" resultMap="BaseResultMap" parameterType="cn.obanks.ar.model.BusinessUser">
+		select * from BUSINESS_USER WHERE DELETED_FLAG='N' AND ID=#{id}
+	</select>
+	
+	<select id="loadBusinessUser" parameterType="Long" resultMap="BaseResultMap">
+		SELECT * FROM BUSINESS_USER WHERE ID=#{InvesterId} LIMIT 1
+	</select>
+	
+	<select id="load" resultMap="BaseResultMap" parameterType="cn.obanks.ar.model.BusinessUser">
+		select * from BUSINESS_USER WHERE DELETED_FLAG='N' AND ID=#{id}
+	</select>
+	
+	<update id="merge" parameterType="cn.obanks.ar.model.BusinessUser"> 
+		UPDATE  BUSINESS_USER 
+		<set>
+			<if test="institutionName!=null">
+				INSTITUTION_NAME=#{institutionName},
+			</if>
+			<if test="department!=null">
+				DEPARTMENT=#{department},
+			</if>
+			<if test="jobTitle!=null">
+				JOB_TITLE=#{jobTitle},
+			</if>
+			<if test="telNum!=null">
+				TEL_NUM=#{telNum},
+			</if>
+			<if test="phone!=null">
+				PHONE=#{phone},
+			</if>
+			<if test="email!=null">
+				EMAIL=#{email},
+			</if>
+			<if test="name!=null">
+				NAME=#{name}
+			</if>
+		</set>
+		WHERE ID=#{id}
+	</update>
+		
+
+
+</mapper>

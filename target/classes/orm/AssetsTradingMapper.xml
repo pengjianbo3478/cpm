@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.obanks.ar.mapper.AssetsTradingMapper">
+	<resultMap id="BaseResult" type="cn.obanks.ar.model.Assets" >
+    <id column="ID" property="id" />
+    <result column="USER_ID" property="userId" />
+    <result column="ASSETS_NAME" property="assetsName" />
+    <result column="SHORT_NAME" property="shortName" />
+    <result column="ASSET_TYPE" property="assetType" />
+    <result column="ASSET_TYPE_OTHER" property="assetTypeOther" />
+    <result column="ASSET_AREA" property="assetArea" />
+    <result column="ASSET_SCALES" property="assetScales" />
+    <result column="ASSET_UNIT" property="assetUnit" />
+    <result column="TERM_MIN" property="termMin" />
+    <result column="TERM_MAX" property="termMax" />
+    <result column="YIELD_MIN" property="yieldMin" />
+    <result column="YIELD_MAX" property="yieldMax" />
+    <result column="VALIDITY" property="validity"  />
+    <result column="FINANCING_CATEGORY" property="financingCategory" />
+    <result column="FINANCING_CATEGORY_OTHER" property="financingCategoryOther" />
+    <result column="USE_OF_FUNDS" property="useOfFunds" />
+    <result column="FINANCING_CREDIT" property="financingCredit" />
+    <result column="FINANCING_ASSURE" property="financingAssure" />
+    <result column="OTHER" property="other" />
+    <result column="INTRODUCTION" property="introduction" />
+    <result column="STATUS" property="status" />
+    <result column="VALID_STATUS" property="validStatus" />
+    <result column="COMMIT_DATE" property="commitDate" />
+    <result column="END_DATE" property="endDate" />
+    <result column="CHECKED_REMARK" property="checkedRemark" />
+    <result column="CHECKED_BY" property="checkedBy" />
+    <result column="CHECKED_DATE" property="checkedDate" />
+    <result column="RELEASED_BY" property="releasedBy"  />
+    <result column="RELEASED_DATE" property="releasedDate" />
+    <result column="UNRELEASED_BY" property="unreleasedBy" />
+    <result column="UNRELEASED_DATE" property="unreleasedDate" />
+    <result column="OFFER_FLAG" property="offerFlag" />
+    <result column="OFFER_TIME" property="offerTime" />
+    <result column="CREATED_BY" property="createdBy" />
+    <result column="CREATED_DATE" property="createdDate" />
+    <result column="UPDATED_BY" property="updatedBy" />
+    <result column="UPDATED_DATE" property="updatedDate" />
+    <result column="DELETED_FLAG" property="deletedFlag" />
+    
+    <result column="DATE_OF_INTEREST" property="dateOfInterest" />
+    <result column="DUE_DATE" property="dueDate" />
+    <result column="FUND_STATUS" property="fundStatus" />
+    <result column="ASSET_STATUS" property="assetStatus" />
+    <result column="INSTITUTION_NAME" property="institutionName" />
+    <result column="AMOUNT_UNIT" property="amountUnit" />
+    <result column="PHONE" property="phone" />
+    <result column="VIEWER_ID" property="viewerId" />
+    <result column="CONCERN_COUNT" property="concernCount" />
+    <result column="OFFER_AMOUNT" property="offerAmount" />
+    <result column="OFFER_COUNT" property="offerCount" />
+    <result column="CONCERN_COUNT_TOTAL" property="concernCountTotal" />
+    <result column="OFFER_COUNT_TOTAL" property="offerCountTotal" />
+    <result column="VIEW_COUNT_TOTAL" property="viewCountTotal" />
+    <result column="FINANCING" property="financing" />
+    <result column="OFFER_AMOUNT_TOTAL" property="offerAmountTotal" />
+  </resultMap>
+	<sql id="assets_search">
+		<if test="condition!=null">
+			<if test="condition.userId!= null and condition.userId!= ''">
+				AND INVESTER_ID= #{condition.userId}
+			</if>
+			<if
+				test="condition.financingCategory!= null and condition.financingCategory!= ''">
+				AND FINANCING_CATEGORY= #{condition.financingCategory}
+			</if>
+			<if test="condition.assetType!= null and condition.assetType!= ''">
+				AND ASSET_TYPE= #{condition.assetType}
+			</if>
+		</if>
+	</sql>
+
+
+
+	<select id="searchAssetsTrading" parameterType="cn.obanks.common.Paginate"
+		resultMap="BaseResult">
+	SELECT A1.ID,A1.ASSETS_NAME,A1.FINANCING_CATEGORY,A1.ASSET_AREA,A1.TERM_MAX,A1.TERM_MIN,A1.ASSET_SCALES,A1.YIELD_MIN,A1.ASSET_UNIT,A1.YIELD_MAX,A1.ASSET_STATUS
+		FROM  ASSETS A1 LEFT JOIN  ASSETS_DEAL A2 ON A1.ID = A2.ASSETS_ID WHERE  1=1
+		<include refid="assets_search" />
+		ORDER BY A1.ID  DESC LIMIT #{startNum}, #{recordsPerPage}
+	</select>
+	<select id="assetsTradingCount" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT COUNT(1) FROM   ASSETS A1  LEFT JOIN  ASSETS_DEAL A2 ON 
+		A1.ID =A2.ASSETS_ID  WHERE 1=1
+		<include refid="assets_search" />
+	</select>
+	<select id="detail" parameterType="Long" resultMap="BaseResult">
+		SELECT * FROM
+		ASSETS WHERE ID=#{id}
+	</select>
+	
+	<update id="overStatus"  parameterType="cn.obanks.ar.model.Assets">
+	UPDATE ASSETS_DEAL SET STATUS=#{validStatus} WHERE ID=#{id}
+	</update>
+	
+
+</mapper>

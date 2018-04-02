@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE urlrewrite
+    PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+    "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+<urlrewrite decode-using="UTF-8">
+	<rule>
+		<from>/login.html</from>
+		<to>/login.do</to>
+	</rule>
+	<rule>
+		<from>/authentication.html</from>
+		<to>/authentication.do</to>
+	</rule>
+	<rule>
+		<from>/forgot_password.html</from>
+		<to>/businessuser/resetpwd.do</to>
+	</rule>
+	<rule>
+		<from>/checkemail.html</from>
+		<to>/businessuser/checkemail.do</to>
+	</rule>
+	<rule>
+		<from>/checkphone.html</from>
+		<to>/businessuser/checkphone.do</to>
+	</rule>
+	<rule>
+		<from>/sign_up.html</from>
+		<to>/businessuser/add.do</to>
+	</rule>
+	<rule>
+		<from>/captcha.html</from>
+		<to>/checkcode/captcha.do</to>
+	</rule>
+	<rule>
+		<from>/index.html</from>
+		<to>/index.do</to>
+	</rule>
+</urlrewrite>

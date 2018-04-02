@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.obanks.ar.mapper.AssetsMapper" >
+  <resultMap id="BaseResultMap" type="cn.obanks.ar.model.Assets" >
+    <id column="ID" property="id" />
+    <result column="USER_ID" property="userId" />
+    <result column="ASSETS_NAME" property="assetsName" />
+    <result column="SHORT_NAME" property="shortName" />
+    <result column="ASSET_TYPE" property="assetType" />
+    <result column="ASSET_TYPE_OTHER" property="assetTypeOther" />
+    <result column="ASSET_AREA" property="assetArea" />
+    <result column="ASSET_SCALES" property="assetScales" />
+    <result column="ASSET_UNIT" property="assetUnit" />
+    <result column="TERM_MIN" property="termMin" />
+    <result column="TERM_MAX" property="termMax" />
+    <result column="YIELD_MIN" property="yieldMin" />
+    <result column="YIELD_MAX" property="yieldMax" />
+    <result column="VALIDITY" property="validity"  />
+    <result column="FINANCING_CATEGORY" property="financingCategory" />
+    <result column="FINANCING_CATEGORY_OTHER" property="financingCategoryOther" />
+    <result column="USE_OF_FUNDS" property="useOfFunds" />
+    <result column="FINANCING_CREDIT" property="financingCredit" />
+    <result column="FINANCING_ASSURE" property="financingAssure" />
+    <result column="OTHER" property="other" />
+    <result column="INTRODUCTION" property="introduction" />
+    <result column="STATUS" property="status" />
+    <result column="VALID_STATUS" property="validStatus" />
+    <result column="COMMIT_DATE" property="commitDate" />
+    <result column="END_DATE" property="endDate" />
+    <result column="CHECKED_REMARK" property="checkedRemark" />
+    <result column="CHECKED_BY" property="checkedBy" />
+    <result column="CHECKED_DATE" property="checkedDate" />
+    <result column="RELEASED_BY" property="releasedBy"  />
+    <result column="RELEASED_DATE" property="releasedDate" />
+    <result column="UNRELEASED_BY" property="unreleasedBy" />
+    <result column="UNRELEASED_DATE" property="unreleasedDate" />
+    <result column="OFFER_FLAG" property="offerFlag" />
+    <result column="OFFER_TIME" property="offerTime" />
+    <result column="CREATED_BY" property="createdBy" />
+    <result column="CREATED_DATE" property="createdDate" />
+    <result column="UPDATED_BY" property="updatedBy" />
+    <result column="UPDATED_DATE" property="updatedDate" />
+    <result column="DELETED_FLAG" property="deletedFlag" />
+    
+    <result column="DATE_OF_INTEREST" property="dateOfInterest" />
+    <result column="DUE_DATE" property="dueDate" />
+    <result column="FUND_STATUS" property="fundStatus" />
+    <result column="ASSET_STATUS" property="assetStatus" />
+    <result column="INSTITUTION_NAME" property="institutionName" />
+    <result column="AMOUNT_UNIT" property="amountUnit" />
+    <result column="PHONE" property="phone" />
+    <result column="VIEWER_ID" property="viewerId" />
+    <result column="CONCERN_COUNT" property="concernCount" />
+    <result column="OFFER_AMOUNT" property="offerAmount" />
+    <result column="OFFER_COUNT" property="offerCount" />
+    <result column="CONCERN_COUNT_TOTAL" property="concernCountTotal" />
+    <result column="OFFER_COUNT_TOTAL" property="offerCountTotal" />
+    <result column="VIEW_COUNT_TOTAL" property="viewCountTotal" />
+    <result column="FINANCING" property="financing" />
+    <result column="OFFER_AMOUNT_TOTAL" property="offerAmountTotal" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    ID, USER_ID, ASSETS_NAME, SHORT_NAME, ASSET_TYPE, ASSET_TYPE_OTHER, ASSET_AREA, ASSET_SCALES, 
+    ASSET_UNIT, TERM_MIN,TERM_MAX, YIELD_MIN, YIELD_MAX, VALIDITY, FINANCING_CATEGORY, FINANCING_CATEGORY_OTHER, 
+    USE_OF_FUNDS, FINANCING_CREDIT, FINANCING_ASSURE, OTHER, INTRODUCTION, STATUS, VALID_STATUS, 
+    COMMIT_DATE, END_DATE, CHECKED_REMARK, CHECKED_BY, CHECKED_DATE, RELEASED_BY, RELEASED_DATE, 
+    UNRELEASED_BY, UNRELEASED_DATE, OFFER_FLAG, OFFER_TIME, CREATED_BY, CREATED_DATE, 
+    UPDATED_BY, UPDATED_DATE, DELETED_FLAG,FINANCING
+  </sql>
+   
+   <select id="load" parameterType="long" resultMap="BaseResultMap">
+		SELECT * FROM ASSETS WHERE ID = #{id}
+	</select>
+	<select id="batchupdate" parameterType="long" resultMap="BaseResultMap">
+		SELECT * FROM ASSETS WHERE ID = #{id} AND  USER_ID = #{condition.userId}
+	</select> 
+	
+	<insert id="add" parameterType="cn.obanks.ar.model.Assets">
+		<selectKey resultType="long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+		</selectKey>
+		INSERT INTO ASSETS (
+		ID,
+		USER_ID,
+		ASSETS_NAME,
+		SHORT_NAME,
+		ASSET_TYPE,
+		ASSET_TYPE_OTHER,
+		ASSET_AREA,
+		ASSET_SCALES,
+		ASSET_UNIT,
+		TERM_MIN,
+		TERM_MAX,
+		YIELD_MIN,
+		YIELD_MAX,
+		VALIDITY,
+		FINANCING_CATEGORY,
+		FINANCING_CATEGORY_OTHER,
+		USE_OF_FUNDS,
+		FINANCING_CREDIT,
+		FINANCING_ASSURE,
+		OTHER,
+		INTRODUCTION, 
+		STATUS, 
+		VALID_STATUS, 
+    	COMMIT_DATE, 
+    	END_DATE, 
+    	CHECKED_REMARK, 
+    	CHECKED_BY, 
+    	CHECKED_DATE, 
+    	RELEASED_BY, 
+    	RELEASED_DATE, 
+    	UNRELEASED_BY, 
+    	UNRELEASED_DATE, 
+    	OFFER_FLAG, 
+    	OFFER_TIME,
+		CREATED_BY,
+		CREATED_DATE,
+		UPDATED_BY,
+		UPDATED_DATE,
+		DELETED_FLAG,
+		ASSET_STATUS,
+		FINANCING
+		)
+		VALUES
+		(#{id},
+		#{userId},
+		#{assetsName},
+		#{shortName},
+		#{assetType},
+		#{assetTypeOther},
+		#{assetArea},
+		#{assetScales},
+		#{assetUnit},
+		#{termMin},
+		#{termMax},
+		#{yieldMin},
+		#{yieldMax},
+		#{validity},
+		#{financingCategory},
+		#{financingCategoryOther},
+		#{useOfFunds},
+		#{financingCredit},
+		#{financingAssure},
+		#{other},
+		#{introduction},
+		#{status},
+		#{validStatus},
+		#{commitDate},
+		#{endDate},
+		#{checkedRemark},
+		#{checkedBy},
+		#{checkedDate},
+		#{releasedBy},
+		#{releasedDate},
+		#{unreleasedBy},
+		#{unreleasedDate},
+		#{offerFlag},
+		#{offerTime},
+		#{createdBy},
+		#{createdDate},
+		#{updatedBy},
+		#{updatedDate},
+		#{deletedFlag},
+		#{assetStatus},
+		#{financing})
+	</insert>
+	
+	<update id="changeOfferFlag" parameterType="cn.obanks.ar.model.Assets">
+		UPDATE ASSETS SET OFFER_FLAG= #{offerFlag} where ID=#{id}
+	</update>
+	
+	<update id="mergestatus" parameterType="cn.obanks.ar.model.Assets">
+		UPDATE ASSETS SET
+		STATUS=#{status}
+		WHERE ID=#{id}
+	</update>
+	
+	<update id="mergeAssetsStatus" parameterType="cn.obanks.ar.model.Assets">
+		UPDATE ASSETS
+		<set>
+			<if test="assetStatus!=null">
+				ASSET_STATUS=#{assetStatus},
+			</if>
+			<if test="dateOfInterest!=null">
+				DATE_OF_INTEREST=#{dateOfInterest},
+			</if>
+			<if test="dueDate!=null">
+				DUE_DATE=#{dueDate},
+			</if>
+			<if test="updatedBy!=null">
+				UPDATED_BY=#{updatedBy},
+			</if>
+			<if test="updatedDate!=null">
+				UPDATED_DATE=#{updatedDate},
+			</if>
+			</set>
+			 WHERE USER_ID= #{userId} AND ID=#{id}
+	</update>
+	
+	<update id="mergeTime" parameterType="cn.obanks.ar.model.Assets">
+		UPDATE ASSETS
+		<set>
+			<if test="dateOfInterest!=null">
+				DATE_OF_INTEREST=#{dateOfInterest},
+			</if>
+			<if test="dueDate!=null">
+				DUE_DATE=#{dueDate},
+			</if>
+			<if test="updatedDate!=null">
+				UPDATED_DATE=#{updatedDate},
+			</if>
+			</set>
+			WHERE ID=#{id} 
+		   <!--  <include refid="paginateCondition2" /> -->
+	</update>
+	
+	<update id="merge" parameterType="cn.obanks.ar.model.Assets">
+		UPDATE ASSETS
+		<set>
+			<if test="userId!=null">
+				USER_ID=#{userId},
+			</if>
+			<if test="assetsName!=null">
+				ASSETS_NAME=#{assetsName},
+			</if>
+			<if test="shortName!=null">
+				SHORT_NAME=#{shortName},
+			</if>
+			<if test="assetType!=null">
+				ASSET_TYPE=#{assetType},
+			</if>
+			<if test="assetTypeOther!=null">
+				ASSET_TYPE_OTHER=#{assetTypeOther},
+			</if>
+			<if test="assetArea!=null">
+				ASSET_AREA=#{assetArea},
+			</if>
+			<if test="assetScales!=null">
+				ASSET_SCALES=#{assetScales},
+			</if>
+			<if test="assetUnit!=null">
+				ASSET_UNIT=#{assetUnit},
+			</if>
+			<if test="termMin!=null">
+				TERM_MIN=#{termMin},
+			</if>
+			<if test="termMax!=null">
+				TERM_MAX=#{termMax},
+			</if>
+			<if test="yieldMin!=null">
+				YIELD_MIN=#{yieldMin},
+			</if>
+			<if test="yieldMax!=null">
+				YIELD_MAX=#{yieldMax},
+			</if>
+			<if test="validity!=null">
+				VALIDITY=#{validity},
+			</if>
+			<if test="financingCategory!=null">
+				FINANCING_CATEGORY=#{financingCategory},
+			</if>
+			<if test="financingCategoryOther!=null">
+				FINANCING_CATEGORY_OTHER=#{financingCategoryOther},
+			</if>
+			<if test="useOfFunds!=null">
+				USE_OF_FUNDS=#{useOfFunds},
+			</if>
+			<if test="financingCredit!=null">
+				FINANCING_CREDIT=#{financingCredit},
+			</if>
+			<if test="financingAssure!=null">
+				FINANCING_ASSURE=#{financingAssure},
+			</if>
+			<if test="other!=null">
+				OTHER=#{other},
+			</if>
+			<if test="introduction!=null">
+				INTRODUCTION=#{introduction},
+			</if>
+			<if test="status!=null">
+				STATUS=#{status},
+			</if>
+			<if test="validStatus!=null">
+				VALID_STATUS=#{validStatus},
+			</if>
+			<if test="commitDate!=null">
+				COMMIT_DATE=#{commitDate},
+			</if>
+			<if test="endDate!=null">
+				END_DATE=#{endDate},
+			</if>
+			<if test="checkedRemark!=null">
+				CHECKED_REMARK=#{checkedRemark},
+			</if>
+			<if test="checkedBy!=null">
+				CHECKED_BY=#{checkedBy},
+			</if>
+			<if test="checkedDate!=null">
+				CHECKED_DATE=#{checkedDate},
+			</if>
+			<if test="releasedBy!=null">
+				RELEASED_BY=#{releasedBy},
+			</if>
+			<if test="releasedDate!=null">
+				RELEASED_DATE=#{releasedDate},
+			</if>
+			<if test="unreleasedBy!=null">
+				UNRELEASED_BY=#{unreleasedBy},
+			</if>
+			<if test="unreleasedDate!=null">
+				UNRELEASED_DATE=#{unreleasedDate},
+			</if>
+			<if test="offerFlag!=null">
+				OFFER_FLAG=#{offerFlag},
+			</if>
+			<if test="offerTime!=null">
+				OFFER_TIME=#{offerTime},
+			</if>
+			<if test="createdBy!=null">
+				CREATED_BY=#{createdBy},
+			</if>
+			<if test="createdDate!=null">
+				CREATED_DATE=#{createdDate},
+			</if>
+			<if test="updatedBy!=null">
+				UPDATED_BY=#{updatedBy},
+			</if>
+			<if test="updatedDate!=null">
+				UPDATED_DATE=#{updatedDate},
+			</if>
+			<if test="deletedFlag!=null">
+				DELETED_FLAG=#{deletedFlag},
+			</if>
+			<if test="assetStatus!=null">
+				ASSET_STATUS=#{assetStatus},
+			</if>
+			<if test="financing!=null">
+				FINANCING=#{financing}
+			</if>
+			
+			
+		</set>
+		WHERE ID=#{id}
+	</update>
+	
+    <sql id="paginateCondition">
+		
+			<if test="condition!=null">
+			 AND<foreach collection="condition.assetScales" item="i" open="(" close=")" separator="OR">
+				<if test="i!= null and i==1" >
+					ASSET_UNIT <![CDATA[=]]> 'K'
+				</if> 
+				<if test="i!= null and i==2" >
+					ASSET_SCALES <![CDATA[>=]]> 1 AND ASSET_SCALES <![CDATA[<]]> 10 AND ASSET_UNIT <![CDATA[=]]> 'M'
+				</if> 
+				<if test="i!= null and i==3" >
+					ASSET_SCALES <![CDATA[>=]]> 10 AND ASSET_SCALES <![CDATA[<]]> 30 AND ASSET_UNIT <![CDATA[=]]> 'M'
+				</if> 
+				<if test="i!= null and i==4" >
+					ASSET_SCALES <![CDATA[>=]]> 30 AND ASSET_UNIT <![CDATA[=]]> 'M'
+				</if>
+				<if test="i!= null and i==999.0" >
+					ASSET_SCALES 
+				</if> 
+			</foreach>
+			AND<foreach collection="condition.termMin" item="i" open="(" close=")" separator="OR">
+				<if test="i!= null and i==444" >
+					TERM_MIN <![CDATA[<]]> 12
+				</if> 
+				<if test="i!= null and i==555" >
+					TERM_MIN <![CDATA[>=]]> 12 AND TERM_MIN <![CDATA[<]]> 24
+				</if> 
+				<if test="i!= null and i==666" >
+					TERM_MIN <![CDATA[>=]]> 24
+				</if> 
+				<if test="i!= null and i==999" >
+					TERM_MIN 
+				</if> 
+			</foreach>
+			AND<foreach collection="condition.yieldMin" item="i" open="(" close=")" separator="OR">
+				<if test="i!= null and i==1" >
+					YIELD_MIN <![CDATA[<]]> 5
+				</if> 
+				<if test="i!= null and i==2" >
+					YIELD_MIN <![CDATA[>=]]> 5 AND YIELD_MIN <![CDATA[<]]> 8
+				</if> 
+				<if test="i!= null and i==3" >
+					YIELD_MIN <![CDATA[>=]]> 8 AND YIELD_MIN <![CDATA[<]]> 12
+				</if> 
+				<if test="i!= null and i==4" >
+					YIELD_MIN <![CDATA[>=]]> 12
+				</if> 
+				<if test="i!= null and i==999" >
+					YIELD_MIN 
+				</if>
+			</foreach>
+			AND<foreach collection="condition.yieldMin" item="i" open="(" close=")" separator="OR">
+				<if test="i!= null and i==1" >
+					YIELD_MAX <![CDATA[<]]> 5
+				</if> 
+				<if test="i!= null and i==2" >
+					YIELD_MAX <![CDATA[>=]]> 5 AND YIELD_MAX <![CDATA[<]]> 8
+				</if> 
+				<if test="i!= null and i==3" >
+					YIELD_MAX <![CDATA[>=]]> 8 AND YIELD_MAX <![CDATA[<]]> 12
+				</if> 
+				<if test="i!= null and i==4" >
+					YIELD_MAX <![CDATA[>=]]> 12
+				</if> 
+				<if test="i!= null and i==999" >
+					YIELD_MAX 
+				</if>
+			</foreach>
+			AND<foreach collection="condition.financingCategory" item="i" open="(" close=")" separator="OR">
+				<if test="i!= null and i==1" >
+					FINANCING_CATEGORY <![CDATA[=]]> 1
+				</if> 
+				<if test="i!= null and i==2" >
+					FINANCING_CATEGORY  <![CDATA[=]]> 2
+				</if> 
+				<if test="i!= null and i==3" >
+					FINANCING_CATEGORY <![CDATA[=]]> 3
+				</if> 
+				<if test="i!= null and i==4" >
+					FINANCING_CATEGORY <![CDATA[=]]> 4
+				</if> 
+				<if test="i!= null and i==999" >
+					FINANCING_CATEGORY 
+				</if>
+			</foreach>
+			AND<foreach collection="condition.assetType" item="i" open="(" close=")" separator="OR">
+				<if test="i!= null and i==1" >
+					ASSET_TYPE <![CDATA[=]]> 1
+				</if> 
+				<if test="i!= null and i==2" >
+					ASSET_TYPE  <![CDATA[=]]> 2
+				</if> 
+				<if test="i!= null and i==3" >
+					ASSET_TYPE <![CDATA[=]]> 3
+				</if> 
+				<if test="i!= null and i==4" >
+					ASSET_TYPE <![CDATA[=]]> 4
+				</if> 
+				<if test="i!= null and i==5" >
+					ASSET_TYPE <![CDATA[=]]> 5
+				</if> 
+				<if test="i!= null and i==6" >
+					ASSET_TYPE <![CDATA[=]]> 6
+				</if> 
+				<if test="i!= null and i==7" >
+					ASSET_TYPE <![CDATA[=]]> 7
+				</if> 
+				<if test="i!= null and i==8" >
+					ASSET_TYPE <![CDATA[=]]> 8
+				</if>
+				<if test="i!= null and i==999" >
+					ASSET_TYPE
+				</if>
+			</foreach>
+			</if>
+	</sql>
+	
+	<sql id="paginateCondition1">
+			<where>
+			<if test="condition!=null">
+				<if test="condition.status != null and condition.status != ''">
+					STATUS = #{condition.status}
+				</if>
+				<if test="condition.userId != null and condition.userId != ''">
+				AND 	USER_ID = #{condition.userId}
+				</if>
+			</if>
+		</where>
+	</sql>
+<!-- 	
+	<sql id="paginateCondition2">
+			<if test="condition!=null">
+				<if test="condition.userId != null and condition.userId != ''">
+				AND  USER_ID = #{condition.userId}
+				</if>
+			</if>
+	</sql> -->
+	
+	
+
+	<select id="search" parameterType="cn.obanks.common.Paginate"
+		resultMap="BaseResultMap">
+		SELECT *,(SELECT COUNT(ID) FROM ASSETS_CONCERN WHERE ASSETS_ID=ASSETS.ID AND CONCERN_OWNER_ID=#{condition.userID} AND DELETED_FLAG='N') CONCERN_COUNT,(SELECT SUM(OFFER_AMOUNT) FROM ASSETS_DEAL WHERE ASSETS_ID=ASSETS.ID) OFFER_AMOUNT,(SELECT COUNT(ID) FROM ASSETS_DEAL WHERE ASSETS_ID=ASSETS.ID AND INVESTER_ID=#{condition.userID}) OFFER_COUNT FROM ASSETS WHERE STATUS='OL'
+		<include refid="paginateCondition" />
+		ORDER BY ID DESC LIMIT  #{startNum},  #{recordsPerPage}
+	</select>
+	
+	<select id="searchAssets" parameterType="cn.obanks.common.Paginate"
+		resultMap="BaseResultMap">
+		SELECT * FROM ASSETS 
+		<include refid="paginateCondition1" />
+		AND STATUS <![CDATA[!=]]>'RQ'
+		ORDER BY  STATUS='DF' DESC , UPDATED_DATE  DESC LIMIT  #{startNum}, #{recordsPerPage}
+	</select>
+	
+	<select id="countAssets" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT COUNT(1) FROM ASSETS  
+	 	<include refid="paginateCondition1" />
+	 	AND STATUS <![CDATA[!=]]>'RQ'
+	</select>
+
+	<select id="count" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT COUNT(1) FROM ASSETS  WHERE STATUS='OL'
+		<include refid="paginateCondition" />
+	</select>
+	
+	<select id="searchAssets2" parameterType="cn.obanks.ar.model.Assets" resultMap="BaseResultMap">
+	SELECT * FROM ASSETS
+	</select>
+	
+	<select id="countCellAssets" parameterType="cn.obanks.common.Paginate"
+		resultType="java.lang.Long">
+		SELECT COUNT(1) FROM ASSETS
+	</select>
+	
+	<select id="searchTotal" parameterType="cn.obanks.ar.model.Assets"
+		resultMap="BaseResultMap">
+		SELECT *,
+		(SELECT COUNT(ID) FROM ASSETS_CONCERN WHERE ASSETS_ID=ASSETS.ID AND CONCERN_OWNER_ID=#{userId} AND DELETED_FLAG='N') CONCERN_COUNT,
+		(SELECT COUNT(ID) FROM ASSETS_DEAL WHERE ASSETS_ID=ASSETS.ID AND INVESTER_ID=#{userId}) OFFER_COUNT,
+		(SELECT COUNT(ID) FROM ASSETS_VIEW_JOURNAL WHERE ASSET_ID=ASSETS.ID)VIEW_COUNT_TOTAL,
+		(SELECT SUM(OFFER_AMOUNT) FROM ASSETS_DEAL WHERE ASSETS_ID=ASSETS.ID) OFFER_AMOUNT_TOTAL,
+		(SELECT COUNT(ID) FROM ASSETS_CONCERN WHERE ASSETS_ID=ASSETS.ID AND
+		DELETED_FLAG='N') CONCERN_COUNT_TOTAL,
+		(SELECT COUNT(ID) FROM ASSETS_DEAL WHERE ASSETS_ID=ASSETS.ID)
+		OFFER_COUNT_TOTAL
+		FROM ASSETS WHERE ID = #{id} 
+	</select>
+	
+	<select id="searchName" parameterType="String" resultMap="BaseResultMap">
+		SELECT * FROM ASSETS
+		<include refid="searchcondition" />
+	</select>
+	
+	<sql id="searchcondition">
+			<where>
+				<if test="name != null and name != ''">
+					ASSETS_NAME = #{name}
+				</if>
+				<if test="userId != null and userId != ''">
+				AND  USER_ID = #{userId}
+				</if>
+		</where>
+	</sql>
+	
+</mapper>

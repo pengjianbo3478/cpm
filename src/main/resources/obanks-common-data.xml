@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="commonSelectList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>P</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>未激活</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>A</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>激活成功</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>D</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>完结</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="assetTypelist" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>0</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>请选择</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>1</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>单一信托计划</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>2</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>集合信托计划</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>3</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>定向资管计划</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>4</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>专项资管计划</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>5</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>集合资管计划</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>6</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>私募基金</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>7</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>公募基金</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>99</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>其他</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="financingCategoryList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>0</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>请选择</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>1</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>房地产</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>2</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>政府平台</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>3</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>工商企业</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>99</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>其他</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="targetTypeList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>1</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>银行</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>2</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>保险</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>3</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>公募</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>4</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>私募</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>5</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>券商</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>6</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>信托</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>7</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>金融租赁</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>8</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>金控集团</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>9</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>互金工司</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>10</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>商业保理</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>11</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>商业租赁</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>99</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>其他</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+
+	</bean>
+	<bean id="assetUnitSelectList" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>K</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>万元</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>M</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>亿元</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+	<bean id="Assets_progress" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>SP</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>立项</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>SR</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>开始评审</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>TR</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>通过评审</value>
+					</constructor-arg>
+				</bean>
+				<bean class="cn.obanks.common.Item">
+					<constructor-arg index="0">
+						<value>IS</value>
+					</constructor-arg>
+					<constructor-arg index="1">
+						<value>发行</value>
+					</constructor-arg>
+				</bean>
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>
